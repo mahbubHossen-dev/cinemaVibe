@@ -6,6 +6,7 @@ import AddMovie from "../Pages/AddMovie";
 import MyFavorites from "../Pages/MyFavorites";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
+import Details from "../Pages/Details";
 
 const router = createBrowserRouter([
     {
@@ -14,11 +15,13 @@ const router = createBrowserRouter([
         children: [
             {
                 path: '/',
-                element: <Home></Home>
+                element: <Home></Home>,
+                loader: () => fetch('http://localhost:5000/movies')
             },
             {
                 path: '/allMovies',
-                element: <AllMovies></AllMovies>
+                element: <AllMovies></AllMovies>,
+                loader: () => fetch('http://localhost:5000/movies') 
             },
             {
                 path: '/addMovie',
@@ -35,6 +38,11 @@ const router = createBrowserRouter([
             {
                 path: '/register',
                 element: <Register></Register>
+            },
+            {
+                path: '/details/:id',
+                element: <Details></Details>,   
+                loader: ({params}) => fetch(`http://localhost:5000/movies/${params.id}`)
             }
         ]
     },
