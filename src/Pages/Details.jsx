@@ -1,4 +1,5 @@
 import React from 'react';
+import toast from 'react-hot-toast';
 import { Link, useLoaderData } from 'react-router-dom';
 
 const Details = () => {
@@ -6,8 +7,21 @@ const Details = () => {
     const movie = useLoaderData()
     console.log(movie)
 
-    const handleAddToFav = (id) => {
-        console.log(id)
+    const handleAddToFav = () => {
+        fetch('http://localhost:5000/favoriteMovies', {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(movie)
+        })
+        .then(res => res.json())
+        .then(data => {
+            toast.success("Add To Favorite List")
+        })
+        .catch(err => {
+            toast.error(err)
+        })
     }
 
     return (
@@ -29,7 +43,7 @@ const Details = () => {
             </div>
             <Link to='/allMovies'><button className="btn">See All Movies</button></Link>
             <button className="btn">Delete Movie</button>
-            <button onClick={() => handleAddToFav(movie._id)} className="btn">Add to Favorite</button>
+            <button onClick={handleAddToFav} className="btn">Add to Favorite</button>
         </div>
     );
 };
