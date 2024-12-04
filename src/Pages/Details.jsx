@@ -24,6 +24,16 @@ const Details = () => {
         })
     }
 
+    const handleDeleteMovie = (id) => {
+        fetch(`http://localhost:5000/movies/${id}`, {
+            method: "DELETE",
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+        })
+    }
+
     return (
         <div>
             <div className="card bg-base-100 shadow-xl">
@@ -42,7 +52,7 @@ const Details = () => {
                 </div>
             </div>
             <Link to='/allMovies'><button className="btn">See All Movies</button></Link>
-            <button className="btn">Delete Movie</button>
+            <button onClick={() => handleDeleteMovie(movie._id)} className="btn">Delete Movie</button>
             <button onClick={handleAddToFav} className="btn">Add to Favorite</button>
         </div>
     );

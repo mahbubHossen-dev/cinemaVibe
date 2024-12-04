@@ -19,7 +19,7 @@ const Home = () => {
                     </div>
                     <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-6 py-4'>
                         {
-                            moviesData.slice(0, 6).map((movieData, idx) => <CardMovie key={idx} movieData={movieData}></CardMovie>)
+                            moviesData.slice(0, 6).map((movieData, idx) => <CardMovie btnText='See Details' key={idx} movieData={movieData}></CardMovie>)
                         }
                     </div>
 

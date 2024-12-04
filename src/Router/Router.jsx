@@ -29,7 +29,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/myFavorites',
-                element: <MyFavorites></MyFavorites>
+                element: <MyFavorites></MyFavorites>,
+                loader: () => fetch('http://localhost:5000/favoriteMovies')
             },
             {
                 path: '/login',

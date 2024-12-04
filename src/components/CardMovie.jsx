@@ -1,10 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
-const CardMovie = ({movieData}) => {
+const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) => {
 
-    console.log(movieData)
-    const {_id, title, poster, duration, genre, rating, year, description} = movieData || {}
+
+    const { _id, title, poster, duration, genre, rating, year, description } = movieData || {}
+
+    const handleDeleteFav = (id) => {
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+
+                fetch(`http://localhost:5000/favoriteMovies/${id}`, {
+                    method: 'DELETE',
+                })
+                .then(res => res.json())
+                .then(data => {
+                    const remainingMovie = favoriteMovies.filter(movie => movie._id !== id)
+                    setFavoriteMovies(remainingMovie)
+                })
+
+            }
+        });
+
+
+
+        // console.log(id)
+    }
 
     return (
         <div>
@@ -24,7 +61,14 @@ const CardMovie = ({movieData}) => {
                     <p>{rating}</p>
                     <p>{year}</p>
                     <p>{description}</p>
-                    <Link to={`/details/${_id}`}><button className='btn'>See Details</button></Link>
+
+                    {
+                        btnText === 'See Details'
+                            ? <Link to={`/details/${_id}`}><button className='btn'>See Details</button></Link>
+                            : <button onClick={() => handleDeleteFav(_id)} className='btn'>Delete Favorite</button>
+                    }
+
+
                 </div>
             </div>
         </div>
