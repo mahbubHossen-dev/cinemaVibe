@@ -26,4 +26,6 @@ const MyFavorites = () => {
     );
 };
 
+
+
 export default MyFavorites;

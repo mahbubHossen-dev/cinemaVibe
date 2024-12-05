@@ -56,7 +56,7 @@ const Details = () => {
                         console.log(data)
                     })
 
-                    navigate('/allMovies')
+                navigate('/allMovies')
             }
         });
 
@@ -65,7 +65,7 @@ const Details = () => {
 
     return (
         <div>
-            <div className="card bg-base-100 shadow-xl">
+            <div className="card bg-base-100 shadow-xl max-w-5xl mx-auto">
                 <figure>
                     <img
                         className='h-80 w-full rounded-lg'
@@ -79,10 +79,11 @@ const Details = () => {
                     <p>{movie.genre}</p>
                     <p>{movie.duration}</p>
                 </div>
+                <div><button onClick={() => handleDeleteMovie(movie._id)} className="btn">Delete Movie</button></div>
+                <div><button onClick={handleAddToFav} className="btn">Add to Favorite</button></div>
+                <Link to='/updateMovie'><button className="btn">Update Movie</button></Link>
             </div>
-            <Link to='/allMovies'><button className="btn">See All Movies</button></Link>
-            <button onClick={() => handleDeleteMovie(movie._id)} className="btn">Delete Movie</button>
-            <button onClick={handleAddToFav} className="btn">Add to Favorite</button>
+            <button className="btn"><Link to='/allMovies'>See All Movies</Link></button>
         </div>
     );
 };

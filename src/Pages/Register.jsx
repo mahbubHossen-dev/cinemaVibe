@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Register = () => {
+    const navigate = useNavigate()
+    const location = useLocation()
+    console.log(location.state)
 
     const { createUser, setUser, userLoginWithGoogle, updateUserProfile } = useContext(AuthContext)
 
@@ -43,6 +46,7 @@ const Register = () => {
                         console.log('update error')
                     })
                 console.log(result.user)
+                navigate(location.state ? `${location.state}` : '/')
             })
             .catch(err => {
                 console.log(err.message)
@@ -54,6 +58,7 @@ const Register = () => {
         userLoginWithGoogle()
             .then(result => {
                 console.log(result.user)
+                navigate(location.state ? location.state : '/')
             })
             .catch(err => {
                 console.log(err.message)

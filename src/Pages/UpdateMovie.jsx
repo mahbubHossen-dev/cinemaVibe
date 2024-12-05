@@ -1,16 +1,13 @@
-import React, { useContext, useState } from 'react';
-import toast from 'react-hot-toast';
+import React, { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
-import Swal from 'sweetalert2';
-import { AuthContext } from '../provider/AuthProvider';
 
-const AddMovie = () => {
-    const {user} = useContext(AuthContext)
+const UpdateMovie = () => {
+
     const [rating, setRating] = useState(0)
     const [selectedYear, setSelectedYear] = useState("")
     const [category, setCategory] = useState("")
 
-    const handleAddMovies = (e) => {
+    const handleUpdateMovie = () => {
         e.preventDefault()
         const form = e.target;
         const title = form.title.value;
@@ -22,7 +19,7 @@ const AddMovie = () => {
         const userEmail = user.email
 
         // console.log(duration)
-        const newMovie = {userEmail, title, poster, duration, genre, year, rating, description }
+        const newMovie = { userEmail, title, poster, duration, genre, year, rating, description }
         // console.log(newMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
@@ -42,32 +39,10 @@ const AddMovie = () => {
             return
         }
 
-        if(rating === 0){
+        if (rating === 0) {
             alert('Please rating')
             return;
         }
-
-        // console.log(newMovie)
-
-        fetch('http://localhost:5000/movies', {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(newMovie)
-        })
-            .then(res => res.json())
-            .then(data => {
-                if(data.acknowledged){
-                    toast.success('Successfully Added!')
-                    console.log(data)
-                }
-                // console.log(data)
-            })
-            .catch(err => {
-                toast.error(err)
-            })
-    
     }
 
     const handleYear = (e) => {
@@ -86,7 +61,7 @@ const AddMovie = () => {
     return (
         <div>
             <div className="card bg-base-100 w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
-                <form onSubmit={handleAddMovies} className="card-body">
+                <form onSubmit={handleUpdateMovie} className="card-body">
                     <div className='grid md:grid-cols-2 grid-cols-1 gap-6'>
                         <div className="form-control">
                             <label className="label">
@@ -160,7 +135,7 @@ const AddMovie = () => {
                             className="textarea textarea-bordered textarea-md w-full max-w-xs"></textarea>
                     </div>
                     <div className="form-control mt-6">
-                        <button className="btn w-full btn-primary">Login</button>
+                        <button className="btn w-full btn-primary">Update Movie</button>
                     </div>
                 </form>
             </div>
@@ -168,4 +143,4 @@ const AddMovie = () => {
     );
 };
 
-export default AddMovie;
+export default UpdateMovie;

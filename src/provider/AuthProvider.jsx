@@ -6,16 +6,20 @@ export const AuthContext = createContext(null)
 const AuthProvider = ({children}) => {
 
     const [user, setUser] = useState(null)
+    const [loading, setLoading] = useState(true)
 
     const createUser = (email, password) => {
+        setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
     const loginUser = (email, password) => {
+        setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
     const logOut = () => {
+        setLoading(true)
         return signOut(auth)
     }
 
@@ -23,11 +27,14 @@ const AuthProvider = ({children}) => {
         const unsubscribe =  onAuthStateChanged(auth, currUser => {
             if(currUser){
                 setUser(currUser)
+                
             }else{
                 console.log('no user is logged in')
                 setUser(null)
             }
+            setLoading(false)
         })
+        
 
         return () => {
             unsubscribe()
@@ -38,10 +45,12 @@ const AuthProvider = ({children}) => {
     const provider = new GoogleAuthProvider()
 
     const userLoginWithGoogle = () => {
+        setLoading(true)
         return signInWithPopup(auth, provider)
     }
 
     const updateUserProfile = (updatedData) => {
+        setLoading(true)
         return updateProfile(auth.currentUser, updatedData)
     }
 
@@ -49,6 +58,7 @@ const AuthProvider = ({children}) => {
     const userInfo = {
         user,
         setUser,
+        loading,
         createUser,
         loginUser,
         logOut,

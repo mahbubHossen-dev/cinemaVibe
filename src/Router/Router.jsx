@@ -7,16 +7,20 @@ import MyFavorites from "../Pages/MyFavorites";
 import Login from "../Pages/Login";
 import Register from "../Pages/Register";
 import Details from "../Pages/Details";
+import Error from "../Pages/Error";
+import UpdateMovie from "../Pages/UpdateMovie";
+import PrivateRoute from "../Layout/PrivateRoute";
 
 const router = createBrowserRouter([
     {
         path: '/',
         element: <MainLayout></MainLayout>,
+        errorElement: <Error></Error>,
         children: [
             {
                 path: '/',
                 element: <Home></Home>,
-                loader: () => fetch('http://localhost:5000/movies')
+                loader: () => fetch('http://localhost:5000/movies/limits')
             },
             {
                 path: '/allMovies',
@@ -25,11 +29,11 @@ const router = createBrowserRouter([
             },
             {
                 path: '/addMovie',
-                element: <AddMovie></AddMovie>
+                element: <PrivateRoute><AddMovie></AddMovie></PrivateRoute>
             },
             {
                 path: '/myFavorites',
-                element: <MyFavorites></MyFavorites>,
+                element: <PrivateRoute><MyFavorites></MyFavorites></PrivateRoute>,
                 loader: () => fetch('http://localhost:5000/favoriteMovies')
             },
             {
@@ -42,8 +46,12 @@ const router = createBrowserRouter([
             },
             {
                 path: '/details/:id',
-                element: <Details></Details>,   
+                element: <PrivateRoute><Details></Details></PrivateRoute>,   
                 loader: ({params}) => fetch(`http://localhost:5000/movies/${params.id}`)
+            },
+            {
+                path: '/updateMovie',
+                element: <UpdateMovie></UpdateMovie>
             }
         ]
     },

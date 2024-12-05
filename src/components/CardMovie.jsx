@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import ReactStars from "react-rating-stars-component";
-import { Rating } from 'react-simple-star-rating';
+import PropTypes from 'prop-types';
 
 const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) => {
     const { _id, title, poster, duration, genre, rating, year, description } = movieData || {}
-    const [rate, setRating] = useState(movieData.rating)
-
-    console.log(rate)
 
     const handleDeleteFav = (id) => {
 
@@ -61,6 +58,7 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                     <p>{duration}</p>
                     <div className='flex gap-4 items-center'>
                         <ReactStars
+                            
                             count={parseInt(rating)}
                             size={24}
                             activeColor="#ffd700"
@@ -69,7 +67,7 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                         />
                     </div>
 
-                    <p>{rate}</p>
+                    <p>{rating}</p>
                     <p>{year}</p>
                     <p>{description}</p>
 

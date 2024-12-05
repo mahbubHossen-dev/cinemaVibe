@@ -77,7 +77,7 @@ const Navbar = () => {
                     <div className=''>
                         {
                             user 
-                            ? <div>
+                            ? <div className='tooltip tooltip-info tooltip-bottom'  data-tip={user.displayName}>
                                 <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
                             </div>
                             :<FaRegCircleUser className='text-3xl' />

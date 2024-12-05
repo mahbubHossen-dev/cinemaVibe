@@ -1,11 +1,13 @@
 import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
 
 const Login = () => {
     const {loginUser} = useContext(AuthContext)
     // console.log(name)
+    const location = useLocation()
+    console.log(location.state)
 
     const handleLogin = (e) => {
         e.preventDefault()
@@ -50,7 +52,7 @@ const Login = () => {
                     <button className='btn w-1/2 mx-auto bg-gray-500'><FaGoogle />Google Login</button>
                 </div>
 
-                <p className='text-center'>Do not Have an Account ? <Link to='/register' className='font-medium'>Register</Link></p>
+                <p className='text-center'>Do not Have an Account ? <Link state={location.state} to='/register' className='font-medium'>Register</Link></p>
             </div>
         </div>
     );
