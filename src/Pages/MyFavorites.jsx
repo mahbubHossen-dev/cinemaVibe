@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import { useLoaderData } from 'react-router-dom';
+import React, { useContext, useEffect, useState } from 'react';
 import CardMovie from '../components/CardMovie';
+import { AuthContext } from '../provider/AuthProvider';
 
 const MyFavorites = () => {
+    const {user} = useContext(AuthContext)
 
-    const favMoviesData = useLoaderData()
-    const [favoriteMovies, setFavoriteMovies] = useState(favMoviesData)
+    const [favoriteMovies, setFavoriteMovies] = useState([])
 
+    useEffect(() => {
+        fetch(`http://localhost:5000/favoriteMovies/${user?.email}`)
+        .then(res => res.json())
+        .then(data => {
+            setFavoriteMovies(data)
+        })
+    }, [])
 
-
-    console.log(favMoviesData)
 
     return (
         <div className='max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-4'>
@@ -25,7 +30,6 @@ const MyFavorites = () => {
         </div>
     );
 };
-
 
 
 export default MyFavorites;
