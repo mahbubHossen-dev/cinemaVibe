@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import ReactStars from "react-rating-stars-component";
+import { Rating } from 'react-simple-star-rating';
 
 const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) => {
-
-
     const { _id, title, poster, duration, genre, rating, year, description } = movieData || {}
+    const [rate, setRating] = useState(movieData.rating)
+
+    console.log(rate)
 
     const handleDeleteFav = (id) => {
 
@@ -29,19 +32,17 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                 fetch(`http://localhost:5000/favoriteMovies/${id}`, {
                     method: 'DELETE',
                 })
-                .then(res => res.json())
-                .then(data => {
-                    const remainingMovie = favoriteMovies.filter(movie => movie._id !== id)
-                    setFavoriteMovies(remainingMovie)
-                })
+                    .then(res => res.json())
+                    .then(data => {
+                        const remainingMovie = favoriteMovies.filter(movie => movie._id !== id)
+                        setFavoriteMovies(remainingMovie)
+                    })
 
             }
         });
-
-
-
-        // console.log(id)
     }
+
+
 
     return (
         <div>
@@ -58,7 +59,17 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                     </h2>
                     <p>{genre}</p>
                     <p>{duration}</p>
-                    <p>{rating}</p>
+                    <div className='flex gap-4 items-center'>
+                        <ReactStars
+                            count={parseInt(rating)}
+                            size={24}
+                            activeColor="#ffd700"
+                            value={rating}
+                            edit={false}
+                        />
+                    </div>
+
+                    <p>{rate}</p>
                     <p>{year}</p>
                     <p>{description}</p>
 

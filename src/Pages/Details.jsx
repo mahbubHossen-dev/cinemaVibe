@@ -1,10 +1,12 @@
 import React from 'react';
 import toast from 'react-hot-toast';
-import { Link, useLoaderData } from 'react-router-dom';
+import { Link, useLoaderData, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const Details = () => {
 
     const movie = useLoaderData()
+    const navigate = useNavigate()
     console.log(movie)
 
     const handleAddToFav = () => {
@@ -15,23 +17,50 @@ const Details = () => {
             },
             body: JSON.stringify(movie)
         })
-        .then(res => res.json())
-        .then(data => {
-            toast.success("Add To Favorite List")
-        })
-        .catch(err => {
-            toast.error(err)
-        })
+            .then(res => res.json())
+            .then(data => {
+                toast.success("Add To Favorite List")
+            })
+            .catch(err => {
+                toast.error(err)
+            })
     }
 
     const handleDeleteMovie = (id) => {
-        fetch(`http://localhost:5000/movies/${id}`, {
-            method: "DELETE",
-        })
-        .then(res => res.json())
-        .then(data => {
-            console.log(data)
-        })
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+
+                fetch(`http://localhost:5000/movies/${id}`, {
+                    method: "DELETE",
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if (data.deletedCount > 0) {
+
+                        }
+                        console.log(data)
+                    })
+
+                    navigate('/allMovies')
+            }
+        });
+
+
     }
 
     return (

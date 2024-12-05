@@ -1,8 +1,25 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { FaRegCircleUser } from 'react-icons/fa6';
 import { Link, NavLink } from 'react-router-dom';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Navbar = () => {
+    const { user, logOut } = useContext(AuthContext)
+    // console.log(user)
+
+    // console.log(user.photoURL)
+
+    const handleLogout =() => {
+        logOut()
+        .then(() => {
+            console.log('signout success')
+        })
+        .catch(err => {
+            console.log('signout unsuccessful')
+        })
+    }
+
+
     const menuItems = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allMovies'>All Movies</NavLink></li>
@@ -46,14 +63,26 @@ const Navbar = () => {
                     </ul>
                 </div>
                 <div className="navbar-end flex md:gap-4 gap-2">
+                    
+                    {
+                        user
+                            ? <div>
+                                <button onClick={handleLogout} className="btn">Logout</button>
+                            </div>
+                            : <div>
+                                <Link to='/login'><button className="btn">Login</button></Link>
+                                <Link to='/register'><button className="btn">Register</button></Link>
+                            </div>
+                    }
                     <div className=''>
-                        <FaRegCircleUser className='text-3xl' />
-                    </div>
-                    <div>
-                        <Link to='/login'><button className="btn">Login</button></Link>
-                    </div>
-                    <div>
-                        <Link to='/register'><button className="btn">Register</button></Link>
+                        {
+                            user 
+                            ? <div>
+                                <img className='w-10 h-10 rounded-full' src={user.photoURL} alt="" />
+                            </div>
+                            :<FaRegCircleUser className='text-3xl' />
+                        }
+                        
                     </div>
                 </div>
             </div>
