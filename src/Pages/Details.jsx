@@ -1,21 +1,38 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import { AuthContext } from '../provider/AuthProvider';
 
 const Details = () => {
+    const {user} = useContext(AuthContext)
 
     const movie = useLoaderData()
     const navigate = useNavigate()
     console.log(movie)
+    console.log(movie)
+
+    const newMovie = {...movie, email: user.email}
+    // const newMovie = {
+    //     description: movie.description,
+    //     duration: movie.duration,
+    //     email: user.email,
+    //     genre: movie.genre,
+    //     poster: movie.poster,
+    //     rating: movie.rating,
+    //     title: movie.title,
+    //     year: movie.year,
+    //     _id: movie._id
+    // }
+    console.log(newMovie)
 
     const handleAddToFav = () => {
-        fetch('http://localhost:5000/favoriteMovies', {
+        fetch(`http://localhost:5000/favoriteMovies`, {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
             },
-            body: JSON.stringify(movie)
+            body: JSON.stringify(newMovie)
         })
             .then(res => res.json())
             .then(data => {

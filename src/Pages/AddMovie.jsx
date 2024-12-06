@@ -19,10 +19,9 @@ const AddMovie = () => {
         const genre = form.genre.value;
         const year = form.year.value;
         const description = form.description.value;
-        const userEmail = user.email
 
         // console.log(duration)
-        const newMovie = {userEmail, title, poster, duration, genre, year, rating, description }
+        const newMovie = { title, poster, duration, genre, year, rating, description }
         // console.log(newMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
@@ -84,34 +83,34 @@ const AddMovie = () => {
     };
 
     return (
-        <div>
-            <div className="card bg-base-100 w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
-                <form onSubmit={handleAddMovies} className="card-body">
-                    <div className='grid md:grid-cols-2 grid-cols-1 gap-6'>
+        <div className='bg-[#292929] py-12'>
+            <div className="card bg-[#3C3D3F]  w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
+                <form onSubmit={handleAddMovies} className="card-body ">
+                    <div className='grid md:grid-cols-2 grid-cols-1 gap-6 '>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Title</span>
+                                <span className="label-text text-white">Movie Title</span>
                             </label>
-                            <input type="text" name='title' placeholder="title" className="input input-bordered" required />
+                            <input type="text" name='title' placeholder="title" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Poster URL</span>
+                                <span className="label-text text-white">Movie Poster URL</span>
                             </label>
-                            <input type="text" name='poster' placeholder="poster-url" className="input input-bordered" required />
+                            <input type="text" name='poster' placeholder="poster-url" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Duration</span>
+                                <span className="label-text text-white">Movie Duration</span>
                             </label>
-                            <input type="number" name='duration' placeholder="duration" className="input input-bordered" required />
+                            <input type="number" name='duration' placeholder="duration" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Genre</span>
+                                <span className="label-text text-white">Genre</span>
                             </label>
                             <select
-                                className="select select-accent w-full"
+                                className="select w-full border-red-600"
                                 value={category}
                                 onChange={handleMovie}
                                 name='genre'>
@@ -123,7 +122,7 @@ const AddMovie = () => {
                         </div>
 
                         <select
-                            className="select select-accent w-full"
+                            className="select w-full border-red-600 my-3"
                             name="year"
                             required
                             value={selectedYear}
@@ -139,7 +138,7 @@ const AddMovie = () => {
                         </select>
 
 
-                        <div className='App'>
+                        <div className='my-3'>
                             <Rating
                                 onClick={handleRating}
                                 ratingValue={rating}
@@ -152,15 +151,16 @@ const AddMovie = () => {
                             />
                         </div>
 
-                        <textarea
+                        
+                    </div>
+                    <textarea
                             name='description'
                             minLength={10}
                             required
                             placeholder="Write something about this movie"
-                            className="textarea textarea-bordered textarea-md w-full max-w-xs"></textarea>
-                    </div>
+                            className="textarea textarea-bordered textarea-md w-full border-red-600 mt-3"></textarea>
                     <div className="form-control mt-6">
-                        <button className="btn w-full btn-primary">Login</button>
+                        <button className="btn bg-red-600 border border-red-600 hover:border-red-600 text-lg text-white hover:bg-transparent w-full">Login</button>
                     </div>
                 </form>
             </div>

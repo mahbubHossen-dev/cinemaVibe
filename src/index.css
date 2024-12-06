@@ -5,3 +5,8 @@
 svg.star-svg{
     display: inline;
 }
+.menu li > *:not(ul, .menu-title, details, .btn).active{
+    background: transparent;
+    border-bottom: 2px solid red;
+    border-radius: none;
+}
