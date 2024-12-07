@@ -2,9 +2,10 @@ import React, { useContext } from 'react';
 import { FaGoogle } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Login = () => {
-    const { loginUser, userLoginWithGoogle, updateUserProfile } = useContext(AuthContext)
+    const { loginUser, userLoginWithGoogle, updateUserProfile, setUser } = useContext(AuthContext)
     // console.log(name)
     const location = useLocation()
     const navigate = useNavigate()
@@ -18,9 +19,11 @@ const Login = () => {
 
         loginUser(email, password)
             .then(result => {
+                toast.success("Login Success")
                 updateUserProfile({ email })
                     .then(() => {
                         console.log('profile update')
+                        setUser(result.user)
                     })
                     .catch(err => {
                         console.log('update error')
@@ -30,17 +33,21 @@ const Login = () => {
             })
             .catch(err => {
                 console.log(err.message)
+                toast.error(err.message)
             })
     }
 
     const handleGoogleLogin = () => {
         userLoginWithGoogle()
             .then(result => {
+                toast.success("Login Success")
                 console.log(result.user)
+                setUser(result.user)
                 navigate(location.state ? `${location.state}` : '/')
             })
             .catch(err => {
                 console.log(err.message)
+                toast.error(err.message)
             })
     }
 

@@ -1,12 +1,13 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { FaGoogle, FaUser, FaEnvelope, FaLock, FaImage } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../provider/AuthProvider';
+import toast from 'react-hot-toast';
 
 const Register = () => {
     const navigate = useNavigate()
     const location = useLocation()
-
+    const [errorMessage, setErrorMessage] = useState("")
     const { createUser, setUser, userLoginWithGoogle, updateUserProfile } = useContext(AuthContext)
 
     const handleRegister = (e) => {
@@ -17,38 +18,45 @@ const Register = () => {
         const photo = form.photo.value;
         const password = form.password.value;
 
+        setErrorMessage("")
+
         if (password.length < 6) {
-            alert('password must be 6 Character or more')
+            setErrorMessage('Password should be at least 6 characters')
+            
             return
         }
 
         const hasUppercase = /(?=.*[A-Z])/;
         const hasLowercase = /(?=.*[a-z])/;
         if (!hasUppercase.test(password)) {
-            alert('password must be one uppercase')
+            setErrorMessage('The password must contain at least one uppercase letter.')
             return
         }
 
         if (!hasLowercase.test(password)) {
-            alert('password must be one lowercase')
+            setErrorMessage('The password must contain at least one lowercase letter.')
             return
         }
 
         createUser(email, password)
             .then(result => {
-                setUser(result.user)
+                // setUser(result.user)
+                toast.success("Register Success")
                 updateUserProfile({ displayName: name, photoURL: photo, email })
                     .then(() => {
                         console.log('update success')
+                        setUser(result.user)
                     })
                     .catch(err => {
                         console.log('update error')
+                        toast.error(err.message)
                     })
                     navigate(location.state ? `${location.state}` : '/')
                 console.log(result.user)
             })
             .catch(err => {
                 console.log(err.message)
+                toast.error(err.message)
             })
         console.log(name, email, photo, password)
     }
@@ -56,12 +64,14 @@ const Register = () => {
     const handleGoogleLogin = () => {
         userLoginWithGoogle()
             .then(result => {
+                toast.success("Register Success")
                 console.log(result.user)
-                
+                setUser(result.user)
                 navigate(location.state ? location.state : '/')
             })
             .catch(err => {
                 console.log(err.message)
+                toast.error(err.message)
             })
     }
 
@@ -183,7 +193,12 @@ const Register = () => {
 
                     <p className="text-center text-gray-300 mt-6">Already have an account?<Link to='/login' className="text-red-500 hover:underline"> Log in here!</Link>
                     </p>
+
+                    {
+                    errorMessage && <p className='text-center text-red-500 mt-6 font-medium text-lg'>{errorMessage}</p>
+                }
                 </div>
+                
             </div>
 
         </div>

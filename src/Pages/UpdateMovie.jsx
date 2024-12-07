@@ -1,13 +1,28 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import toast from 'react-hot-toast';
 import { Rating } from 'react-simple-star-rating';
+import { AuthContext } from '../provider/AuthProvider';
+import { useLoaderData, useParams } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 const UpdateMovie = () => {
-
+    const { user } = useContext(AuthContext)
+    const { id } = useParams()
+    const movieData = useLoaderData()
     const [rating, setRating] = useState(0)
     const [selectedYear, setSelectedYear] = useState("")
     const [category, setCategory] = useState("")
 
-    const handleUpdateMovie = () => {
+    const [title, setTitle] = useState(movieData?.title)
+    const [poster, setPoster] = useState(movieData?.poster)
+    const [duration, setDuration] = useState(movieData?.duration)
+    const [description, setDescription] = useState(movieData?.description)
+
+
+    console.log(id)
+    console.log(description)
+
+    const handleUpdateMovie = (e) => {
         e.preventDefault()
         const form = e.target;
         const title = form.title.value;
@@ -16,33 +31,103 @@ const UpdateMovie = () => {
         const genre = form.genre.value;
         const year = form.year.value;
         const description = form.description.value;
-        const userEmail = user.email
 
         // console.log(duration)
-        const newMovie = { userEmail, title, poster, duration, genre, year, rating, description }
-        // console.log(newMovie)
+        const updateMovie = { title, poster, duration, genre, year, rating, description }
+        console.log(updateMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
         const imageUrlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
 
         if (!urlRegex.test(poster)) {
-            alert("please valid url")
+            toast.error("Please provide a valid URL for the movie poster.")
             return
         }
         if (!imageUrlRegex.test(poster)) {
-            alert("Please Write Image Url")
+            toast.error("Please provide a valid URL for the movie poster.")
+            return
+        }
+
+        if (title.length === 0) {
+            toast.error('The input cannot be empty')
+            return
+        }
+        if (title.length < 2) {
+            toast.error('Please enter at least 2 characters.')
             return
         }
 
         if (duration <= 60) {
-            alert("duration must be upper 60")
+            toast.error("Please provide a value greater than 60")
             return
         }
 
         if (rating === 0) {
-            alert('Please rating')
+            toast.error('Please select a rating to add the movie.')
             return;
         }
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Update it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+                console.log('upate click')
+
+                fetch(`http://localhost:5000/movies/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(updateMovie)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        if(data.acknowledged){
+                            console.log(data)
+                        }
+                        // console.log(data)
+                    })
+                    .catch(err => {
+                        toast.error(err)
+                    })
+
+            }
+
+        });
+
+
+        // fetch(`http://localhost:5000/movies/${id}`, {
+        //     method: 'POST',
+        //     headers: {
+        //         'content-type': 'application/json'
+        //     },
+        //     body: JSON.stringify(newMovie)
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         if(data.acknowledged){
+        //             toast.success('Successfully Added!')
+        //             console.log(data)
+        //         }
+        //         // console.log(data)
+        //     })
+        //     .catch(err => {
+        //         toast.error(err)
+        //     })
+
+        // console.log(newMovie)
+
     }
 
     const handleYear = (e) => {
@@ -59,34 +144,34 @@ const UpdateMovie = () => {
     };
 
     return (
-        <div>
-            <div className="card bg-base-100 w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
-                <form onSubmit={handleUpdateMovie} className="card-body">
-                    <div className='grid md:grid-cols-2 grid-cols-1 gap-6'>
+        <div className='bg-[#292929] py-12'>
+            <div className="card bg-[#3C3D3F]  w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
+                <form onSubmit={handleUpdateMovie} className="card-body ">
+                    <div className='grid md:grid-cols-2 grid-cols-1 gap-6 '>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Title</span>
+                                <span className="label-text text-white">Movie Title</span>
                             </label>
-                            <input type="text" name='title' placeholder="title" className="input input-bordered" required />
+                            <input onChange={(e) => setTitle(e.target.value)} type="text" value={title} name='title' placeholder="title" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Poster URL</span>
+                                <span className="label-text text-white">Movie Poster URL</span>
                             </label>
-                            <input type="text" name='poster' placeholder="poster-url" className="input input-bordered" required />
+                            <input onChange={(e) => setPoster(e.target.value)} value={poster} type="text" name='poster' placeholder="poster-url" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Movie Duration</span>
+                                <span className="label-text text-white">Movie Duration as Minutes</span>
                             </label>
-                            <input type="number" name='duration' placeholder="duration" className="input input-bordered" required />
+                            <input onChange={(e) => setDuration(e.target.value)} value={duration} type="number" name='duration' placeholder="number" className="input input-bordered border-red-600" required />
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text">Genre</span>
+                                <span className="label-text text-white">Genre</span>
                             </label>
                             <select
-                                className="select select-accent w-full"
+                                className="select w-full border-red-600"
                                 value={category}
                                 onChange={handleMovie}
                                 name='genre'>
@@ -98,7 +183,7 @@ const UpdateMovie = () => {
                         </div>
 
                         <select
-                            className="select select-accent w-full"
+                            className="select w-full border-red-600 my-3"
                             name="year"
                             required
                             value={selectedYear}
@@ -114,7 +199,7 @@ const UpdateMovie = () => {
                         </select>
 
 
-                        <div className='App'>
+                        <div className='my-3'>
                             <Rating
                                 onClick={handleRating}
                                 ratingValue={rating}
@@ -127,15 +212,18 @@ const UpdateMovie = () => {
                             />
                         </div>
 
-                        <textarea
-                            name='description'
-                            minLength={10}
-                            required
-                            placeholder="Write something about this movie"
-                            className="textarea textarea-bordered textarea-md w-full max-w-xs"></textarea>
+
                     </div>
+                    <textarea
+                        onChange={(e) => setDescription(e.target.value)}
+                        value={description}
+                        name='description'
+                        minLength={10}
+                        required
+                        placeholder="Write something about this movie"
+                        className="textarea textarea-bordered textarea-md w-full border-red-600 mt-3"></textarea>
                     <div className="form-control mt-6">
-                        <button className="btn w-full btn-primary">Update Movie</button>
+                        <button className="btn bg-red-600 border border-red-600 hover:border-red-600 text-lg text-white hover:bg-transparent w-full">Login</button>
                     </div>
                 </form>
             </div>

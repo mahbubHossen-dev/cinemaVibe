@@ -25,7 +25,7 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                     icon: "success"
                 });
 
-                fetch(`http://localhost:5000/favoriteMovies/${id}`, {
+                fetch(`https://cinema-vibe-server-side.vercel.app/favoriteMovies/${id}`, {
                     method: 'DELETE',
                 })
                     .then(res => res.json())

@@ -4,11 +4,11 @@ import { AuthContext } from '../provider/AuthProvider';
 
 const MyFavorites = () => {
     const {user} = useContext(AuthContext)
-
+    // console.log(user.email)
     const [favoriteMovies, setFavoriteMovies] = useState([])
 
     useEffect(() => {
-        fetch(`http://localhost:5000/favoriteMovies/${user?.email}`)
+        fetch(`https://cinema-vibe-server-side.vercel.app/favoriteMovies/${user?.email}`)
         .then(res => res.json())
         .then(data => {
             setFavoriteMovies(data)

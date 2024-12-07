@@ -21,34 +21,45 @@ const AddMovie = () => {
         const description = form.description.value;
 
         // console.log(duration)
-        const newMovie = { title, poster, duration, genre, year, rating, description }
+        const newMovie = { title, poster, duration, genre, year, rating, description, email:user.email }
         // console.log(newMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
         const imageUrlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
 
         if (!urlRegex.test(poster)) {
-            alert("please valid url")
+            toast.error("Please provide a valid URL for the movie poster.")
             return
         }
         if (!imageUrlRegex.test(poster)) {
-            alert("Please Write Image Url")
+            toast.error("Please provide a valid URL for the movie poster.")
             return
         }
 
+        if(title.length === 0){
+            toast.error('The input cannot be empty')
+            return
+        }
+        if(title.length < 2){
+            toast.error('Please enter at least 2 characters.')
+            return
+        }
+
+
+
         if (duration <= 60) {
-            alert("duration must be upper 60")
+            toast.error("Please provide a value greater than 60")
             return
         }
 
         if(rating === 0){
-            alert('Please rating')
+            toast.error('Please select a rating to add the movie.')
             return;
         }
 
         // console.log(newMovie)
 
-        fetch('http://localhost:5000/movies', {
+        fetch('https://cinema-vibe-server-side.vercel.app/movies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'

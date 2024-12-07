@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
@@ -7,16 +7,30 @@ import ReactStars from "react-rating-stars-component";
 
 const Details = () => {
     const { user } = useContext(AuthContext)
-    console.log(user)
-    const movie = useLoaderData()
+    const movieData = useLoaderData()
     const navigate = useNavigate()
+    console.log(user.email)
+    const [movie, setMovie] = useState(movieData)
 
-    const newMovie = { ...movie, email: user.email }
+    // const newMovie = {...movie, email: user.email}
 
-    console.log(newMovie)
+    // console.log(movie)
+    const newMovie = {
+        title: movie.title,
+        poster: movie.poster,
+        duration: movie.duration,
+        genre: movie.genre,
+        year: movie.year,
+        rating: movie.rating,
+        description: movie.description,
+        email: user.email
+    }
 
-    const handleAddToFav = () => {
-        fetch(`http://localhost:5000/favoriteMovies`, {
+    const handleFav = () => {
+        console.log("click")
+        console.log(newMovie)
+
+        fetch('https://cinema-vibe-server-side.vercel.app/favoriteMovies', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -25,10 +39,11 @@ const Details = () => {
         })
             .then(res => res.json())
             .then(data => {
-                toast.success("Add To Favorite List")
+                toast.success('Added to Favorite')
+                console.log('success', data)
             })
             .catch(err => {
-                toast.error(err)
+                console.log(err)
             })
     }
 
@@ -51,7 +66,7 @@ const Details = () => {
                     icon: "success"
                 });
 
-                fetch(`http://localhost:5000/movies/${id}`, {
+                fetch(`https://cinema-vibe-server-side.vercel.app/movies/${id}`, {
                     method: "DELETE",
                 })
                     .then(res => res.json())
@@ -60,10 +75,10 @@ const Details = () => {
                             navigate('/allMovies')
                         }
                         console.log(data)
+
                     })
             }
         });
-
 
     }
 
@@ -105,8 +120,8 @@ const Details = () => {
 
                         <div className='flex justify-between items-end pt-20'>
                             <div><button onClick={() => handleDeleteMovie(movie._id)} className="btn border border-red-600">Delete Movie</button></div>
-                            <div><button onClick={handleAddToFav} className="btn border border-red-600">Add to Favorite</button></div>
-                            <Link to='/updateMovie'><button className="btn border border-red-600">Update Movie</button></Link>
+                            <div><button onClick={handleFav} className="btn border border-red-600">Add to Favorite</button></div>
+                            <Link to={`/updateMovie/${movie._id}`}><button className="btn border border-red-600">Update Movie</button></Link>
                         </div>
                     </div>
                 </div>
