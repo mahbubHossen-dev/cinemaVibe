@@ -7,6 +7,7 @@ const Home = () => {
     const moviesAllData = useLoaderData()
     const [moviesData, setMoviesData] = useState(moviesAllData)
 
+
     // console.log(moviesData)
     return (
         <div className='bg-[#292929] pb-12'>
@@ -14,8 +15,9 @@ const Home = () => {
                 <Banner></Banner>
 
                 <div className='my-6'>
-                    <div>
+                    <div className='justify-between items-center'>
                         <h1 className='text-2xl font-medium text-center text-white'>Featured movies</h1>
+                        
                     </div>
                     <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-4'>
                         {
@@ -24,7 +26,7 @@ const Home = () => {
                     </div>
 
                     <div className='text-right'>
-                    <Link to='/allMovies'><button className='btn bg-yellow-400 text-red-800 border-none text-md'>See All Movies</button></Link>
+                        <Link to='/allMovies'><button className='btn bg-yellow-400 text-red-800 border-none text-md'>See All Movies</button></Link>
                     </div>
                 </div>
             </div>
