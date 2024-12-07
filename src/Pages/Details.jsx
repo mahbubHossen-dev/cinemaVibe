@@ -3,27 +3,16 @@ import toast from 'react-hot-toast';
 import { Link, useLoaderData, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { AuthContext } from '../provider/AuthProvider';
+import ReactStars from "react-rating-stars-component";
 
 const Details = () => {
-    const {user} = useContext(AuthContext)
-
+    const { user } = useContext(AuthContext)
+    console.log(user)
     const movie = useLoaderData()
     const navigate = useNavigate()
-    console.log(movie)
-    console.log(movie)
 
-    const newMovie = {...movie, email: user.email}
-    // const newMovie = {
-    //     description: movie.description,
-    //     duration: movie.duration,
-    //     email: user.email,
-    //     genre: movie.genre,
-    //     poster: movie.poster,
-    //     rating: movie.rating,
-    //     title: movie.title,
-    //     year: movie.year,
-    //     _id: movie._id
-    // }
+    const newMovie = { ...movie, email: user.email }
+
     console.log(newMovie)
 
     const handleAddToFav = () => {
@@ -68,12 +57,10 @@ const Details = () => {
                     .then(res => res.json())
                     .then(data => {
                         if (data.deletedCount > 0) {
-
+                            navigate('/allMovies')
                         }
                         console.log(data)
                     })
-
-                navigate('/allMovies')
             }
         });
 
@@ -81,26 +68,53 @@ const Details = () => {
     }
 
     return (
-        <div>
-            <div className="card bg-base-100 shadow-xl max-w-5xl mx-auto">
-                <figure>
-                    <img
-                        className='h-80 w-full rounded-lg'
-                        src={movie.poster}
-                        alt="Shoes" />
-                </figure>
-                <div className="card-body">
-                    <h2 className="card-title">
-                        {movie.title}
-                    </h2>
-                    <p>{movie.genre}</p>
-                    <p>{movie.duration}</p>
+        <div className='bg-[#292929] py-12'>
+            <div className="card bg-[#3C3D3F] shadow-xl max-w-5xl mx-auto p-12 ">
+                <div className='grid grid-cols-5 gap-6 items-start'>
+                    <figure className='col-span-2'>
+                        <img
+                            className='w-full rounded-t-lg'
+                            src={movie.poster}
+                            alt="Shoes" />
+                    </figure>
+                    <div className="card-body col-span-3 space-y-3 text-white">
+                        <h2 className="card-title text-2xl">
+                            {movie.title}
+                        </h2>
+
+                        <p className='text-lg font-medium'>Duration: {movie.duration} min</p>
+
+
+
+                        <p className='text-lg font-medium'>Category: {movie.genre}</p>
+                        <p className='font-medium'>Release Year: {movie.year}</p>
+
+                        <p className=''>{movie.description}</p>
+
+                        <div className='flex items-center'>
+                            <ReactStars
+
+                                count={parseInt(5)}
+                                size={24}
+                                activeColor="#e6494f"
+                                value={movie.rating}
+                                edit={false}
+                            />
+
+                        </div>
+
+                        <div className='flex justify-between items-end pt-20'>
+                            <div><button onClick={() => handleDeleteMovie(movie._id)} className="btn border border-red-600">Delete Movie</button></div>
+                            <div><button onClick={handleAddToFav} className="btn border border-red-600">Add to Favorite</button></div>
+                            <Link to='/updateMovie'><button className="btn border border-red-600">Update Movie</button></Link>
+                        </div>
+                    </div>
                 </div>
-                <div><button onClick={() => handleDeleteMovie(movie._id)} className="btn">Delete Movie</button></div>
-                <div><button onClick={handleAddToFav} className="btn">Add to Favorite</button></div>
-                <Link to='/updateMovie'><button className="btn">Update Movie</button></Link>
+                <div className='text-right mt-6'>
+                    <button className=" btn bg-red-400 border-none  rounded-full px-10 text-white"><Link to='/allMovies'>See All Movies</Link></button>
+                </div>
             </div>
-            <button className="btn"><Link to='/allMovies'>See All Movies</Link></button>
+
         </div>
     );
 };

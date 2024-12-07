@@ -77,8 +77,6 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                             ? <Link to={`/details/${_id}`}><button className='btn bg-red-400 border-none  rounded-full px-10 w-full text-white text-md'>See Details</button></Link>
                             : <button onClick={() => handleDeleteFav(_id)} className='btn'>Delete Favorite</button>
                     }
-
-
                 </div>
             </div>
         </div>
