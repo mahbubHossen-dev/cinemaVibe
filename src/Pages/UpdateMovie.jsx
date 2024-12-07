@@ -107,26 +107,7 @@ const UpdateMovie = () => {
         });
 
 
-        // fetch(`http://localhost:5000/movies/${id}`, {
-        //     method: 'POST',
-        //     headers: {
-        //         'content-type': 'application/json'
-        //     },
-        //     body: JSON.stringify(newMovie)
-        // })
-        //     .then(res => res.json())
-        //     .then(data => {
-        //         if(data.acknowledged){
-        //             toast.success('Successfully Added!')
-        //             console.log(data)
-        //         }
-        //         // console.log(data)
-        //     })
-        //     .catch(err => {
-        //         toast.error(err)
-        //     })
 
-        // console.log(newMovie)
 
     }
 
