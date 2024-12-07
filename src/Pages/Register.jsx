@@ -36,17 +36,15 @@ const Register = () => {
 
         createUser(email, password)
             .then(result => {
-                navigate(location.state ? `${location.state}` : '/')
-                setUser(result.user)
                 updateUserProfile({ displayName: name, photoURL: photo, email })
                     .then(() => {
-                        console.log('profile update')
+                        navigate(location.state ? `${location.state}` : '/')
+                        setUser(result.user)
                     })
                     .catch(err => {
                         console.log('update error')
                     })
                 console.log(result.user)
-                
             })
             .catch(err => {
                 console.log(err.message)
