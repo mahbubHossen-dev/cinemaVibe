@@ -9,12 +9,10 @@ const Details = () => {
     const { user } = useContext(AuthContext)
     const movieData = useLoaderData()
     const navigate = useNavigate()
-    console.log(user.email)
+
     const [movie, setMovie] = useState(movieData)
 
-    // const newMovie = {...movie, email: user.email}
 
-    // console.log(movie)
     const newMovie = {
         title: movie.title,
         poster: movie.poster,
@@ -27,8 +25,7 @@ const Details = () => {
     }
 
     const handleFav = () => {
-        console.log("click")
-        console.log(newMovie)
+
 
         fetch('https://cinema-vibe-server-side.vercel.app/favoriteMovies', {
             method: 'POST',
@@ -40,10 +37,9 @@ const Details = () => {
             .then(res => res.json())
             .then(data => {
                 toast.success('Added to Favorite')
-                console.log('success', data)
             })
             .catch(err => {
-                console.log(err)
+                toast.error(err.message)
             })
     }
 
@@ -74,7 +70,6 @@ const Details = () => {
                         if (data.deletedCount > 0) {
                             navigate('/allMovies')
                         }
-                        console.log(data)
 
                     })
             }

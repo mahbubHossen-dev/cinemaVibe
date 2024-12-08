@@ -10,8 +10,6 @@ const Home = () => {
     const moviesAllData = useLoaderData()
     const [moviesData, setMoviesData] = useState(moviesAllData)
 
-
-    // console.log(moviesData)
     return (
         <div className='pb-12'>
             <div className='w-11/12 md:max-w-6xl mx-auto'>

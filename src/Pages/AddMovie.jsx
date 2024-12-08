@@ -20,9 +20,7 @@ const AddMovie = () => {
         const year = form.year.value;
         const description = form.description.value;
 
-        // console.log(duration)
         const newMovie = { title, poster, duration, genre, year, rating, description, email:user.email }
-        // console.log(newMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
         const imageUrlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
@@ -57,7 +55,6 @@ const AddMovie = () => {
             return;
         }
 
-        // console.log(newMovie)
 
         fetch('https://cinema-vibe-server-side.vercel.app/movies', {
             method: 'POST',
@@ -72,7 +69,6 @@ const AddMovie = () => {
                     toast.success('Successfully Added!')
                     form.reset()
                 }
-                // console.log(data)
             })
             .catch(err => {
                 toast.error(err)

@@ -4,7 +4,6 @@ import { AuthContext } from '../provider/AuthProvider';
 
 const MyFavorites = () => {
     const {user} = useContext(AuthContext)
-    // console.log(user.email)
     const [favoriteMovies, setFavoriteMovies] = useState([])
 
     useEffect(() => {
@@ -12,7 +11,6 @@ const MyFavorites = () => {
         .then(res => res.json())
         .then(data => {
             setFavoriteMovies(data)
-            console.log(data)
         })
     }, [])
 

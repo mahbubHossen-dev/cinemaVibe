@@ -6,28 +6,16 @@ const AllMovies = () => {
     const moviesAllData = useLoaderData()
     const [moviesData, setMoviesData] = useState(moviesAllData)
     const [search, setSearch] = useState("")
-    // useEffect(() => {
-    //     fetch('https://cinema-vibe-server-side.vercel.app/movies')
-    //     .then(res => res.json())
-    //     .then(data => console.log(data))
-    // }, [])
-
-
-    
-
-    // console.log(search)
-    console.log(moviesAllData)
 
     useEffect(() => {
         fetch(`https://cinema-vibe-server-side.vercel.app/movies?searchParams=${search}`)
         .then(res => res.json())
         .then(data => {
-            console.log(data)
             setMoviesData(data)
         })
     }, [search])
 
-    // console.log(moviesAllData)
+
 
     return (
         <div className='bg-[#292929]'>

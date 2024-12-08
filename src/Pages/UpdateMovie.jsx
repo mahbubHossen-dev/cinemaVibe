@@ -19,9 +19,6 @@ const UpdateMovie = () => {
     const [description, setDescription] = useState(movieData?.description)
 
 
-    console.log(id)
-    console.log(movieData)
-
     const handleUpdateMovie = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -32,9 +29,7 @@ const UpdateMovie = () => {
         const year = form.year.value;
         const description = form.description.value;
 
-        // console.log(duration)
         const updateMovie = { title, poster, duration, genre, year, rating, description }
-        console.log(updateMovie)
 
         const urlRegex = /^(https?:\/\/)?([a-zA-Z0-9.-]+)\.([a-zA-Z]{2,})(:[0-9]{1,5})?(\/[^\s]*)?$/;
         const imageUrlRegex = /^(https?:\/\/.*\.(?:png|jpg|jpeg|gif|webp|svg))$/i;
@@ -82,7 +77,6 @@ const UpdateMovie = () => {
                     text: "Your file has been deleted.",
                     icon: "success"
                 });
-                console.log('upate click')
 
                 fetch(`https://cinema-vibe-server-side.vercel.app/movies/${id}`, {
                     method: 'PATCH',
@@ -94,9 +88,9 @@ const UpdateMovie = () => {
                     .then(res => res.json())
                     .then(data => {
                         if(data.acknowledged){
-                            console.log(data)
+                            // console.log(data)
                         }
-                        // console.log(data)
+                        
                     })
                     .catch(err => {
                         toast.error(err)

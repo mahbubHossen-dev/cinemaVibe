@@ -29,7 +29,7 @@ const AuthProvider = ({children}) => {
                 setUser(currUser)
                 
             }else{
-                console.log('no user is logged in')
+                
                 setUser(null)
             }
             setLoading(false)

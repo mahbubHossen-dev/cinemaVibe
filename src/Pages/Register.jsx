@@ -44,33 +44,27 @@ const Register = () => {
                 toast.success("Register Success")
                 updateUserProfile({ displayName: name, photoURL: photo, email })
                     .then(() => {
-                        console.log('update success')
                         setUser(result.user)
                     })
                     .catch(err => {
-                        console.log('update error')
                         toast.error(err.message)
                     })
                     navigate(location.state ? `${location.state}` : '/')
-                console.log(result.user)
+
             })
             .catch(err => {
-                console.log(err.message)
                 toast.error(err.message)
             })
-        console.log(name, email, photo, password)
     }
 
     const handleGoogleLogin = () => {
         userLoginWithGoogle()
             .then(result => {
                 toast.success("Register Success")
-                console.log(result.user)
                 setUser(result.user)
                 navigate(location.state ? location.state : '/')
             })
             .catch(err => {
-                console.log(err.message)
                 toast.error(err.message)
             })
     }
