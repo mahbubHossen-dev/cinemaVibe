@@ -20,7 +20,7 @@ const UpdateMovie = () => {
 
 
     console.log(id)
-    console.log(description)
+    console.log(movieData)
 
     const handleUpdateMovie = (e) => {
         e.preventDefault()

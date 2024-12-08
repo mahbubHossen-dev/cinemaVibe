@@ -83,16 +83,16 @@ const Details = () => {
     }
 
     return (
-        <div className='bg-[#292929] py-12'>
-            <div className="card bg-[#3C3D3F] shadow-xl max-w-5xl mx-auto p-12 ">
-                <div className='grid grid-cols-5 gap-6 items-start'>
-                    <figure className='col-span-2'>
+        <div className='bg-[#292929]'>
+            <div className="card max-w-5xl mx-auto ">
+                <div className='grid md:grid-cols-2 gap-6 items-start bg-[#3C3D3F] md:p-12 rounded-xl'>
+                    <figure className=''>
                         <img
-                            className='w-full rounded-t-lg'
+                            className='md:w-full rounded-t-lg p-6 md:p-0'
                             src={movie.poster}
                             alt="Shoes" />
                     </figure>
-                    <div className="card-body col-span-3 space-y-3 text-white">
+                    <div className="card-body space-y-3 text-white">
                         <h2 className="card-title text-2xl">
                             {movie.title}
                         </h2>
@@ -129,7 +129,7 @@ const Details = () => {
                     <button className=" btn bg-red-400 border-none  rounded-full px-10 text-white"><Link to='/allMovies'>See All Movies</Link></button>
                 </div>
             </div>
-
+            
         </div>
     );
 };

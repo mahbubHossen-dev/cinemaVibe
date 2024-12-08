@@ -3,15 +3,23 @@ import { useLoaderData } from 'react-router-dom';
 import CardMovie from '../components/CardMovie';
 
 const AllMovies = () => {
-
     const moviesAllData = useLoaderData()
     const [moviesData, setMoviesData] = useState(moviesAllData)
     const [search, setSearch] = useState("")
+    // useEffect(() => {
+    //     fetch('https://cinema-vibe-server-side.vercel.app/movies')
+    //     .then(res => res.json())
+    //     .then(data => console.log(data))
+    // }, [])
 
-    console.log(search)
+
+    
+
+    // console.log(search)
+    console.log(moviesAllData)
 
     useEffect(() => {
-        fetch(`http://localhost:5000/movies?searchParams=${search}`)
+        fetch(`https://cinema-vibe-server-side.vercel.app/movies?searchParams=${search}`)
         .then(res => res.json())
         .then(data => {
             console.log(data)

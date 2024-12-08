@@ -10,6 +10,7 @@ import Details from "../Pages/Details";
 import Error from "../Pages/Error";
 import UpdateMovie from "../Pages/UpdateMovie";
 import PrivateRoute from "../Layout/PrivateRoute";
+import Support from "../Pages/Support";
 
 const router = createBrowserRouter([
     {
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
             {
                 path: '/allMovies',
                 element: <AllMovies></AllMovies>,
-                loader: () => fetch('https://cinema-vibe-server-side.vercel.app/movies') 
+                loader: () => fetch('https://cinema-vibe-server-side.vercel.app/movies')
             },
             {
                 path: '/addMovie',
@@ -46,16 +47,20 @@ const router = createBrowserRouter([
             {
                 path: '/details/:id',
                 element: <PrivateRoute><Details></Details></PrivateRoute>,
-                loader: ({params}) => fetch(`https://cinema-vibe-server-side.vercel.app/movies/${params.id}`)
+                loader: ({ params }) => fetch(`https://cinema-vibe-server-side.vercel.app/movies/${params.id}`)
             },
             {
                 path: '/updateMovie/:id',
-                element: <UpdateMovie></UpdateMovie>,
-                loader: ({params}) => fetch(`http://localhost:5000/movies/${params.id}`)
+                element: <PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>,
+                loader: ({ params }) => fetch(`http://localhost:5000/movies/${params.id}`)
+            },
+            {
+                path: '/support',
+                element: <Support></Support>
             }
         ]
     },
-    
+
 ])
 
 export default router

@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import Banner from '../components/Banner';
 import CardMovie from '../components/CardMovie';
 import { Link, useLoaderData } from 'react-router-dom';
+import PackagePrice from '../components/PackagePrice';
+import Feedback from '../components/Feedback';
+import './css/home.css'
 
 const Home = () => {
     const moviesAllData = useLoaderData()
@@ -10,7 +13,7 @@ const Home = () => {
 
     // console.log(moviesData)
     return (
-        <div className='bg-[#292929] pb-12'>
+        <div className='pb-12'>
             <div className='w-11/12 md:max-w-6xl mx-auto'>
                 <Banner></Banner>
 
@@ -29,6 +32,10 @@ const Home = () => {
                         <Link to='/allMovies'><button className='btn bg-yellow-400 text-red-800 border-none text-md'>See All Movies</button></Link>
                     </div>
                 </div>
+
+                <PackagePrice></PackagePrice>
+
+                <Feedback></Feedback>
             </div>
         </div>
     );
