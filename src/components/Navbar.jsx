@@ -84,11 +84,11 @@ const Navbar = () => {
                     {
                         user
                             ? <div>
-                                <button onClick={handleLogout} className="btn">Logout</button>
+                                <button onClick={handleLogout} className="btn border-none mr-2 bg-blue-600 text-white">Logout</button>
                             </div>
-                            : <div>
+                            : <div className='flex'>
                                 <Link to='/login'><button className="btn border-none mr-2 bg-blue-600 text-white">Login</button></Link>
-                                <Link to='/register'><button className="btn border-none bg-blue-600 text-white">Register</button></Link>
+                                <Link to='/register'><button className="hidden md:block btn border-none bg-blue-600 text-white">Register</button></Link>
                             </div>
                     }
                     <div className=' flex gap-6 items-center'>

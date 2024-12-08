@@ -70,7 +70,7 @@ const AddMovie = () => {
             .then(data => {
                 if(data.acknowledged){
                     toast.success('Successfully Added!')
-                    console.log(data)
+                    form.reset()
                 }
                 // console.log(data)
             })
@@ -112,7 +112,7 @@ const AddMovie = () => {
                         </div>
                         <div className="form-control">
                             <label className="label">
-                                <span className="label-text text-white">Movie Duration</span>
+                                <span className="label-text text-white">Movie Duration as Minute</span>
                             </label>
                             <input type="number" name='duration' placeholder="duration" className="input input-bordered border-red-600" required />
                         </div>

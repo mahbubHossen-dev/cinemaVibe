@@ -52,7 +52,7 @@ const router = createBrowserRouter([
             {
                 path: '/updateMovie/:id',
                 element: <PrivateRoute><UpdateMovie></UpdateMovie></PrivateRoute>,
-                loader: ({ params }) => fetch(`http://localhost:5000/movies/${params.id}`)
+                loader: ({ params }) => fetch(`https://cinema-vibe-server-side.vercel.app/movies/${params.id}`)
             },
             {
                 path: '/support',

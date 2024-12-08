@@ -84,7 +84,7 @@ const UpdateMovie = () => {
                 });
                 console.log('upate click')
 
-                fetch(`http://localhost:5000/movies/${id}`, {
+                fetch(`https://cinema-vibe-server-side.vercel.app/movies/${id}`, {
                     method: 'PATCH',
                     headers: {
                         'content-type': 'application/json'

@@ -2,7 +2,7 @@ import React from 'react';
 
 const Support = () => {
     return (
-        <div className='max-w-5xl mx-auto my-12'>
+        <div className='lg:max-w-5xl w-11/12 mx-auto my-12'>
             <div className="join join-vertical w-full">
                 <div className="collapse collapse-arrow join-item border-red-800 border">
                     <input type="radio" name="my-accordion-4" defaultChecked />
