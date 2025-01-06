@@ -39,14 +39,18 @@ const Navbar = () => {
     const menuItems = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/allMovies'>All Movies</NavLink></li>
-        <li><NavLink to='/addMovie'>Add Movie</NavLink></li>
-        <li><NavLink to='/myFavorites'>My Favorites</NavLink></li>
+        {
+            user && <li><NavLink to='/addMovie'>Add Movie</NavLink></li>
+        }
+        {
+            user && <li><NavLink to='/myFavorites'>My Favorites</NavLink></li>
+        }
         <li><NavLink to='/support'>Support</NavLink></li>
     </>
 
     return (
-        <div className='bg-[#292929] nav-theme text-white py-6'>
-            <div className="navbar w-11/12 mx-auto">
+        <div className='bg-[#292929] nav-theme text-white fixed z-50 w-full'>
+            <div className="navbar lg:px-8 xl:px-[8%] mx-auto ">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

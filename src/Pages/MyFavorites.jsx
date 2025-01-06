@@ -16,7 +16,7 @@ const MyFavorites = () => {
 
     
     return (
-        <div className='bg-[#]'>
+        <div className='min-h-[calc(100vh-255px)] pt-20 pb-4'>
             <div className='max-w-6xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-4'>
             {
                 favoriteMovies.map((movieData, idx) => <CardMovie

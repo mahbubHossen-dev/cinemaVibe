@@ -90,7 +90,7 @@ const AddMovie = () => {
     };
 
     return (
-        <div className='bg-[#292929] py-12'>
+        <div className='bg-[#292929] pb-12 pt-20'>
             <div className="card bg-[#3C3D3F]  w-full max-w-5xl mx-auto shrink-0 shadow-2xl">
                 <form onSubmit={handleAddMovies} className="card-body ">
                     <div className='grid md:grid-cols-2 grid-cols-1 gap-6 '>

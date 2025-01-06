@@ -51,7 +51,7 @@ const Login = () => {
     return (
 
 
-        <div className='py-12'>
+        <div className='py-12 pt-24'>
 
             <div className="bg-cover bg-center flex items-center justify-center">
                 <div className="bg-black bg-opacity-60 p-8 rounded-md w-full max-w-md text-white">

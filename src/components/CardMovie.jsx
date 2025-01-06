@@ -6,7 +6,9 @@ import ReactStars from "react-rating-stars-component";
 const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) => {
     const { _id, title, poster, duration, genre, rating, year, description } = movieData || {}
 
-    const handleDeleteFav = (id) => {
+
+
+    const handleDeleteFav = (_id) => {
 
         Swal.fire({
             title: "Are you sure?",
@@ -24,14 +26,18 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                     text: "Your file has been deleted.",
                     icon: "success"
                 });
-
-                fetch(`https://cinema-vibe-server-side.vercel.app/favoriteMovies/${id}`, {
-                    method: 'DELETE',
+                console.log('Click')
+                fetch(`https://cinema-vibe-server-side.vercel.app/favoriteMovies/${_id}`, {
+                    method: "DELETE",
                 })
                     .then(res => res.json())
                     .then(data => {
-                        const remainingMovie = favoriteMovies.filter(movie => movie._id !== id)
-                        setFavoriteMovies(remainingMovie)
+                        console.log('succes', data)
+                        if (data.deletedCount > 0) {
+                            const remaining = favoriteMovies.filter(movie => movie._id !== _id)
+                            // console.log(remaining)
+                            setFavoriteMovies(remaining)
+                        }
                     })
 
             }
@@ -45,15 +51,14 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
             <div className="card bg-[#3C3D3F] text-slate-200 shadow-xl">
                 <figure>
                     <img
-                        className='h-72 w-full rounded-t-lg'
+                        className='h-56 w-full rounded-t-lg'
                         src={poster}
                         alt="Shoes" />
                 </figure>
-                <div className="card-body">
+                <div className="card-body p-4">
                     <div className='flex justify-between items-center'>
                         <div className='flex items-center'>
                             <ReactStars
-
                                 count={parseInt(rating)}
                                 size={24}
                                 activeColor="#ffd700"
@@ -61,16 +66,15 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
                                 edit={false}
                             />
                         </div>
-                        <p className='text-right'>Duration: {duration} min</p>
+                        <p className='text-right'>{duration} min</p>
                     </div>
-                    <h2 className="card-title">
-                        {title}
-                    </h2>
-                    <div className='flex justify-between items-center'>
-                    <p className='text-lg'>{genre}</p>
-                    <p className='text-right'>{year}</p>
+                    <div className='flex justify-between items-center mb-4'>
+                        <h2 className="card-title">
+                            {title}
+
+                        </h2>
+                        <p className='text-right'>{year}</p>
                     </div>
-                    <p>{description}</p>
 
                     {
                         btnText === 'See Details'

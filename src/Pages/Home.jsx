@@ -20,7 +20,7 @@ const Home = () => {
                         <h1 className='text-2xl font-medium text-center text-white'>Featured movies</h1>
                         
                     </div>
-                    <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 py-4'>
+                    <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6 py-4'>
                         {
                             moviesData.map((movieData) => <CardMovie btnText='See Details' key={movieData._id} movieData={movieData}></CardMovie>)
                         }

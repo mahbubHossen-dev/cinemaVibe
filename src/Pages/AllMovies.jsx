@@ -37,7 +37,7 @@ const AllMovies = () => {
                         </label>
                     </div>
                 </div>
-                <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6'>
+                <div className='grid md:grid-cols-3 lg:grid-cols-4 gap-6 mt-6'>
                     {
                         moviesData.map((movieData, idx) => <CardMovie key={idx} btnText="See Details" movieData={movieData}></CardMovie>)
                     }
