@@ -48,33 +48,22 @@ const CardMovie = ({ movieData, btnText, favoriteMovies, setFavoriteMovies }) =>
 
     return (
         <div>
-            <div className="card bg-[#3C3D3F] text-slate-200 shadow-xl">
+            <div className="card bg-[#242433] text-slate-200 shadow-xl">
                 <figure>
                     <img
                         className='h-56 w-full rounded-t-lg'
                         src={poster}
                         alt="Shoes" />
                 </figure>
-                <div className="card-body p-4">
+                <div className="card-body p-3">
+                    
                     <div className='flex justify-between items-center'>
-                        <div className='flex items-center'>
-                            <ReactStars
-                                count={parseInt(rating)}
-                                size={24}
-                                activeColor="#ffd700"
-                                value={rating}
-                                edit={false}
-                            />
-                        </div>
-                        <p className='text-right'>{duration} min</p>
-                    </div>
-                    <div className='flex justify-between items-center mb-4'>
                         <h2 className="card-title">
                             {title}
 
                         </h2>
-                        <p className='text-right'>{year}</p>
                     </div>
+                    <p className='text-white/80'>{description.slice(0,50)}...</p>
 
                     {
                         btnText === 'See Details'

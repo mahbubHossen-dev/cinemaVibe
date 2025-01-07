@@ -52,7 +52,7 @@ const Banner = () => {
         //     </Swiper>
         // </div>
         <div className='w-full pt-24'>
-            <Swiper navigation={true} modules={[Navigation]} className="mySwiper">
+            <Swiper navigation={true} modules={[Navigation]} className="mySwiper rounded-md">
                 <SwiperSlide>
                     <img className='w-full h-[70vh] object-cover' src={slider1} alt="" />
                 </SwiperSlide>

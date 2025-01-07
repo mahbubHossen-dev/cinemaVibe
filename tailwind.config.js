@@ -8,11 +8,10 @@ export default {
   theme: {
     extend: {},
   },
+  darkMode: 'selector',
   plugins: [
     daisyui,
   ],
-  daisyui: {
-    themes: ["light", "dark"],
-  },
+  
 }
 

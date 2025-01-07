@@ -7,20 +7,14 @@ const AllMovies = () => {
     const [moviesData, setMoviesData] = useState(moviesAllData)
     const [search, setSearch] = useState("")
 
-    useEffect(() => {
-        fetch(`https://cinema-vibe-server-side.vercel.app/movies?searchParams=${search}`)
-        .then(res => res.json())
-        .then(data => {
-            setMoviesData(data)
-        })
-    }, [search])
-
-
+    
 
     return (
         <div className='bg-[#292929]'>
-            <div className='max-w-6xl mx-auto py-4'>
-                <div className='flex justify-end'>
+            <div className='max-w-6xl mx-auto py-4 pt-24'>
+
+                <div className='flex justify-end pt-6'>
+                    
                     <div>
                         <label className="input w-full mx input-bordered border-2 border-red-500 bg-red-900 rounded-full flex items-center gap-2 placeholder-red-300">
                             <input onChange={(e) => setSearch(e.target.value)} type="text" className="grow text-white" placeholder="Search" />
