@@ -31,7 +31,7 @@ Middleware Validation: Protect routes with verifyToken middleware to ensure only
 
 - CORS Configuration: Restrict origins to trusted domains with cross-origin credentials enabled.
 
-🛠 Skills
+## 🛠 Skills
 Technologies Used
 
 Frontend:
