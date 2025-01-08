@@ -34,7 +34,7 @@ Middleware Validation: Protect routes with verifyToken middleware to ensure only
 ## 🛠 Skills
 Technologies Used
 
-Frontend:
+### Frontend
 
 React: For building the user interface.
 
@@ -43,6 +43,12 @@ Tailwind CSS: For styling the application.
 daisyUI: For ready-made UI components.
 
 Framer Motion: For animations.
+
+### Backend
+- Express 
+- mongoDB
+- cors
+
 
 ## Dependencies:
 - dotenv: ^16.4.7,
@@ -65,7 +71,7 @@ Framer Motion: For animations.
 ## 1. Installation
 Run npm install to install project dependecies.
 
-### Frontend:
+### Frontend setup:
 After creating a Firebase project, you can find your Firebase configuration details in the Firebase Console. Once you have those, add them to the .env.local file.
 
 Examples:
@@ -77,7 +83,8 @@ Examples:
 - REACT_APP_FIREBASE_APP_ID=your-app-id
 - REACT_APP_FIREBASE_MEASUREMENT_ID=your-measurement-id
 
-### Backend
+### Backend setup
+
 ## 2. Environment setup
 Create a .env file and put your environment variable there. Save the following variable:
 - NODE_ENV=development
