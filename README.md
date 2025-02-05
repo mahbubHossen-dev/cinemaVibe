@@ -1,19 +1,24 @@
 # CinemaVibe
 
 ## 📝 Project Overview
+
 CinemaVibe is a full-stack platform designed for users to add, manage, update, and interact with various movies. This project integrates modern web development technologies to provide an engaging and interactive movie management experience.
 
 ## 🌍 Live Project
+
 🔗 [Live Demo](https://assignments-633bc.web.app/)
 
 ## 🛠 Technologies Used
+
 ### Frontend:
+
 - **React**: For building the user interface.
 - **Tailwind CSS**: For efficient styling.
 - **daisyUI**: Ready-made UI components.
 - **Framer Motion**: For animations.
 
 ### Backend:
+
 - **Express.js**: Server-side framework.
 - **MongoDB**: NoSQL database.
 - **CORS**: Cross-origin resource sharing.
@@ -21,11 +26,12 @@ CinemaVibe is a full-stack platform designed for users to add, manage, update, a
 - **JWT**: Token-based authentication.
 
 ## 📸 Screenshot
-*(Add a clean screenshot of your project here to showcase the UI.)*
 
----
+<img src="https://i.ibb.co/whJ6bzyY/movie.jpg" width="600">
+
 
 ## ✨ Core Features
+
 - **Routing Setup**: Uses React Router to handle navigation.
 - **Private Routes**: Restricts access to authenticated users.
 - **Search Functionality**: Allows users to filter movies by title or category.
@@ -34,6 +40,7 @@ CinemaVibe is a full-stack platform designed for users to add, manage, update, a
 - **Security**: Middleware validation, environment variables, and CORS protection.
 
 ## 📦 Dependencies Used
+
 ```
 dotenv: ^16.4.7
 firebase: ^11.0.2
@@ -56,19 +63,24 @@ swiper: ^11.2.0
 ---
 
 ## ⚡ Installation & Setup
+
 ### 1️⃣ Clone the Repository
+
 ```bash
 git clone https://github.com/your-username/cinemavibe.git
 cd cinemavibe
 ```
 
 ### 2️⃣ Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### 3️⃣ Frontend Environment Setup
+
 Create a `.env.local` file and add your Firebase configuration:
+
 ```env
 REACT_APP_FIREBASE_API_KEY=your-api-key
 REACT_APP_FIREBASE_AUTH_DOMAIN=your-auth-domain
@@ -80,7 +92,9 @@ REACT_APP_FIREBASE_MEASUREMENT_ID=your-measurement-id
 ```
 
 ### 4️⃣ Backend Environment Setup
+
 Create a `.env` file in the backend folder and add:
+
 ```env
 NODE_ENV=development
 PORT=YourPort
@@ -91,6 +105,7 @@ ACCESS_TOKEN_EXPIRATION=YourExpirationTime
 ```
 
 ### 5️⃣ Run the Project
+
 ```bash
 npm run dev
 ```
@@ -100,11 +115,11 @@ Now the project will be running on **localhost:3000** (Frontend) and **localhost
 ---
 
 ## 📌 Relevant Links
-- **Live Project**: [https://assignments-633bc.web.app/](https://assignments-633bc.web.app/)
-- **Frontend Repository**: *(Add your frontend repo link here)*
-- **Backend Repository**: *(Add your backend repo link here)*
+
+🔗 [Live Demo](https://reviewsystem-dfd5c.web.app/)
+
+🔗 [Server-Side Repository](https://github.com/mahbubHossen-dev/CinemaVibe-server)
 
 ---
 
 🔹 This README follows a structured format with all required details. Feel free to customize it further!
-
